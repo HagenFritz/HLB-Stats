@@ -82,6 +82,7 @@ target/
 /admin/
 /recordings/
 /thumbnails/
+/heads/
 
 # Mac OS-specific storage files
 .DS_Store
