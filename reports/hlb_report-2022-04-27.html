@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HLB Stat Report</title>
+		<style type="text/css">
+			h1 {
+                page-break-before: always;
+				color: #4797D2;
+				font-size: 48px;
+                font-family: Helvetica;
+			}
+
+			h2 {
+				color: #F3BB40;
+				font-size: 32px;
+                font-family: Helvetica;
+			}
+
+			h3 {
+				color: #EC5D29;
+				font-size: 24px;
+                font-family: Helvetica;
+			}
+
+			h4 {
+				color: #80AA8B;
+				font-size: 22px;
+                font-family: Helvetica;
+			}
+
+			h5 {
+				color: black;
+				font-size: 20px;
+			}
+
+			p {
+				color: black;
+				font-size: 16px;
+                font-family: Helvetica;
+			}
+			ol {
+				font-family: Helvetica;
+			}
+			ul {
+				color:black;
+				font-size: 16px;
+			}
+            .column {
+                float: left;
+                width: 33.33%;
+                }
+
+                /* Clear floats after the columns */
+                .row:after {
+                content: "";
+                display: table;
+                clear: both;
+                }
+		</style>
+	</head>
+	<body>
+        <h1>High Level Beach: Player Stat Report</h1>
+        <p>Report Date: 2022-04-27</p>
+        <p>Number of Games: 119</p>
+        <h2>About High Level Beach</h2>
+        <p>
+            High Level Beach (HLB) started as a small group of Austin-based players and has since grown into a small syndicate.
+            Players in the group span a range of levels, but typically make appearances at BB leagues and tournaments.
+        </p>
+        <p>
+            The name is inspired by Devin Sears -- one of the original members.
+            Devin insisted on player "High Level" 3s or 4s any time the group decided to play a round outside of the traditional 2s format.
+            The term quickly became a joke amongst the group and rightly became the namesake of the organization. 
+        </p>
+        <p>
+            The organization boasts a <a href="https://www.youtube.com/channel/UCbzTdbIQUKKqTXVV8bfWdJQ">YouTube</a> channel where they post videos from weekly pick-up sessions and the occasional tournament that members participate in.
+            The YouTube channel is managed by Devin Sears and Hagen Fritz. Hagen -- a later addition to the group -- also generates reports (like this) from stats taken on the videos.
+            More about this specific project can be found on <a href="https://github.com/HagenFritz/HLB-Stats">GitHub</a> including past reports and the source code.
+        </p>
+        <h1>Player Leaderboard</h1>
+        <div id="Win Rate">
+            <h2>Win Rate</h2>
+            <p>
+                The percentage of games won, regardless of partner. 
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    
+                        <li>Hagen: 78.2%</li>
+                    
+                        <li>Nate: 66.7%</li>
+                    
+                        <li>Bruno: 61.3%</li>
+                    
+                        <li>Devin: 56.4%</li>
+                    
+                        <li>Carlos: 53.8%</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    
+                        <li>German: 26.1%</li>
+                    
+                        <li>Jake: 26.3%</li>
+                    
+                        <li>Jason: 28.6%</li>
+                    
+                        <li>Tyler: 30.0%</li>
+                    
+                        <li>Josh: 33.3%</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    
+                        <li>Robbie: 10.0%</li>
+                    
+                        <li>Tommy: 9.5%</li>
+                    
+                        <li>Bruno: 3.6%</li>
+                    
+                        <li>Cody: 3.4%</li>
+                    
+                        <li>Jake: 2.8%</li>
+                    
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Point Differential">
+            <h2>Point Differential</h2>
+            <p>
+                The average amount of points a player wins by. 
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    
+                        <li>Hagen: 5.0</li>
+                    
+                        <li>Nate: 4.4</li>
+                    
+                        <li>Robbie: 4.4</li>
+                    
+                        <li>Josh: 4.0</li>
+                    
+                        <li>Tommy: 3.4</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    
+                        <li>Tyler: 1.6</li>
+                    
+                        <li>German: 1.7</li>
+                    
+                        <li>Jason: 1.7</li>
+                    
+                        <li>Bruno: 1.8</li>
+                    
+                        <li>Carlos: 1.9</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    
+                        <li>True: 0.1</li>
+                    
+                        <li>Cody: 0.0</li>
+                    
+                        <li>Josh: 0.0</li>
+                    
+                        <li>Nate: 0.0</li>
+                    
+                        <li>Brandon: -0.1</li>
+                    
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Effectiveness">
+            <h2>Effectiveness</h2>
+            <p>
+                The net contribution a player provides to a game. 
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    
+                        <li>Hagen: 5.0</li>
+                    
+                        <li>Nate: 4.4</li>
+                    
+                        <li>Robbie: 4.4</li>
+                    
+                        <li>Josh: 4.0</li>
+                    
+                        <li>Tommy: 3.4</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    
+                        <li>Tyler: 1.6</li>
+                    
+                        <li>German: 1.7</li>
+                    
+                        <li>Jason: 1.7</li>
+                    
+                        <li>Bruno: 1.8</li>
+                    
+                        <li>Carlos: 1.9</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    
+                        <li>True: 0.1</li>
+                    
+                        <li>Cody: 0.0</li>
+                    
+                        <li>Josh: 0.0</li>
+                    
+                        <li>Nate: 0.0</li>
+                    
+                        <li>Brandon: -0.1</li>
+                    
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Kills">
+            <h2>Kills</h2>
+            <p>
+                The average number of kills a player gets per game from swings/pokies, blocks, and bumps. 
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    
+                        <li>Cody: 7.1</li>
+                    
+                        <li>Robbie: 6.5</li>
+                    
+                        <li>Josh: 6.4</li>
+                    
+                        <li>Hagen: 6.0</li>
+                    
+                        <li>Nate: 5.6</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    
+                        <li>Bruno: 3.4</li>
+                    
+                        <li>Brandon: 4.0</li>
+                    
+                        <li>Tyler: 4.3</li>
+                    
+                        <li>Devin: 4.3</li>
+                    
+                        <li>Carlos: 4.7</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    
+                        <li>True: 0.1</li>
+                    
+                        <li>Tyler: 0.1</li>
+                    
+                        <li>Carlos: 0.0</li>
+                    
+                        <li>German: 0.0</li>
+                    
+                        <li>Josh: 0.0</li>
+                    
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Hitting Efficiency">
+            <h2>Hitting Efficiency</h2>
+            <p>
+                The percentage of swings/pokies that are winners.
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    
+                        <li>Josh: 50.9%</li>
+                    
+                        <li>Hagen: 47.6%</li>
+                    
+                        <li>Cody: 45.1%</li>
+                    
+                        <li>Nate: 42.9%</li>
+                    
+                        <li>Robbie: 42.3%</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    
+                        <li>Bruno: 33.9%</li>
+                    
+                        <li>Tyler: 34.4%</li>
+                    
+                        <li>Tommy: 37.4%</li>
+                    
+                        <li>Devin: 37.4%</li>
+                    
+                        <li>German: 38.2%</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    
+                        <li>True: 1.3%</li>
+                    
+                        <li>Carlos: 0.8%</li>
+                    
+                        <li>Cody: 0.8%</li>
+                    
+                        <li>German: 0.6%</li>
+                    
+                        <li>Devin: 0.1%</li>
+                    
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Serving Percentage">
+            <h2>Serving Percentage</h2>
+            <p>
+                The percentage of a player's serves that land in or are played.
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    
+                        <li>Nate: 94.4%</li>
+                    
+                        <li>True: 94.1%</li>
+                    
+                        <li>Brandon: 93.5%</li>
+                    
+                        <li>Robbie: 93.1%</li>
+                    
+                        <li>Bruno: 92.6%</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    
+                        <li>Jason: 66.7%</li>
+                    
+                        <li>Josh: 74.2%</li>
+                    
+                        <li>Jake: 80.8%</li>
+                    
+                        <li>Cody: 84.6%</li>
+                    
+                        <li>German: 84.6%</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    
+                        <li>Cody: 1.5%</li>
+                    
+                        <li>Hagen: 0.7%</li>
+                    
+                        <li>Brandon: 0.6%</li>
+                    
+                        <li>True: 0.6%</li>
+                    
+                        <li>Tommy: 0.4%</li>
+                    
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Aces">
+            <h2>Aces</h2>
+            <p>
+                Serves that land in untouched or are shanked to the point that the receiver's partner cannot set the ball. 
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    
+                        <li>Josh: 1.5</li>
+                    
+                        <li>Nate: 1.5</li>
+                    
+                        <li>Hagen: 1.2</li>
+                    
+                        <li>True: 1.2</li>
+                    
+                        <li>Jake: 1.2</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    
+                        <li>Cody: 0.5</li>
+                    
+                        <li>Bruno: 0.7</li>
+                    
+                        <li>Carlos: 0.8</li>
+                    
+                        <li>Tommy: 0.9</li>
+                    
+                        <li>Brandon: 0.9</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    
+                        <li>Bruno: 0.1</li>
+                    
+                        <li>Devin: 0.1</li>
+                    
+                        <li>Carlos: 0.0</li>
+                    
+                        <li>Cody: 0.0</li>
+                    
+                        <li>German: 0.0</li>
+                    
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Ace2Error">
+            <h2>Ace:Error</h2>
+            <p>
+                Ratio of a player's aces to their missed served. A ratio greater than 1 indicates a player serves more aces than they miss. 
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    
+                        <li>Jake: 1.7</li>
+                    
+                        <li>Brandon: 1.3</li>
+                    
+                        <li>Hagen: 1.3</li>
+                    
+                        <li>True: 1.3</li>
+                    
+                        <li>Devin: 1.3</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    
+                        <li>Jason: 0.6</li>
+                    
+                        <li>Josh: 0.9</li>
+                    
+                        <li>Carlos: 0.9</li>
+                    
+                        <li>Bruno: 0.9</li>
+                    
+                        <li>Tyler: 1.0</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    
+                        <li>Bruno: 0.1</li>
+                    
+                        <li>Tommy: 0.1</li>
+                    
+                        <li>Brandon: 0.0</li>
+                    
+                        <li>Carlos: 0.0</li>
+                    
+                        <li>Cody: 0.0</li>
+                    
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Pass Rating">
+            <h2>Serve-Receive Rating</h2>
+            <p>
+                How well a player passes a serve on a 0 to 3 scale: 0 - shank, 1 - overpass or setter barely gets ball up, 2 - could be better, 3 - setter can easily get to/set ball
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    
+                        <li>Bruno: 2.2</li>
+                    
+                        <li>Hagen: 2.1</li>
+                    
+                        <li>Tyler: 2.1</li>
+                    
+                        <li>Jake: 2.1</li>
+                    
+                        <li>Jason: 2.1</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    
+                        <li>Tommy: 1.8</li>
+                    
+                        <li>Carlos: 1.8</li>
+                    
+                        <li>Devin: 1.8</li>
+                    
+                        <li>Nate: 1.8</li>
+                    
+                        <li>Robbie: 1.8</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    
+                        <li>Bruno: 0.1</li>
+                    
+                        <li>German: 0.1</li>
+                    
+                        <li>Robbie: 0.1</li>
+                    
+                        <li>Brandon: 0.0</li>
+                    
+                        <li>Carlos: 0.0</li>
+                    
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Blocks">
+            <h2>Blocks</h2>
+            <p>
+                Number of blocks or block touches that result in a kill or are playable after
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    
+                        <li>Robbie: 1.9</li>
+                    
+                        <li>Cody: 1.8</li>
+                    
+                        <li>Josh: 1.4</li>
+                    
+                        <li>Nate: 1.3</li>
+                    
+                        <li>Jason: 1.3</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    
+                        <li>Brandon: 0.6</li>
+                    
+                        <li>Bruno: 0.6</li>
+                    
+                        <li>Devin: 0.7</li>
+                    
+                        <li>German: 0.7</li>
+                    
+                        <li>Tyler: 0.9</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    
+                        <li>German: 0.1</li>
+                    
+                        <li>Brandon: 0.0</li>
+                    
+                        <li>Carlos: 0.0</li>
+                    
+                        <li>Devin: 0.0</li>
+                    
+                        <li>Jake: 0.0</li>
+                    
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Block Efficiency">
+            <h2>Block Efficiency</h2>
+            <p>
+                Percentage of blocks that result in a kill
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    
+                        <li>Bruno: 2.2%</li>
+                    
+                        <li>Hagen: 2.1%</li>
+                    
+                        <li>Tyler: 2.1%</li>
+                    
+                        <li>Jake: 2.1%</li>
+                    
+                        <li>Jason: 2.1%</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    
+                        <li>Tommy: 1.8%</li>
+                    
+                        <li>Carlos: 1.8%</li>
+                    
+                        <li>Devin: 1.8%</li>
+                    
+                        <li>Nate: 1.8%</li>
+                    
+                        <li>Robbie: 1.8%</li>
+                    
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    
+                        <li>Bruno: 0.1%</li>
+                    
+                        <li>German: 0.1%</li>
+                    
+                        <li>Robbie: 0.1%</li>
+                    
+                        <li>Brandon: 0.0%</li>
+                    
+                        <li>Carlos: 0.0%</li>
+                    
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Winningest Team">
+            <h2>Winningest Team</h2>
+            <p>
+                Best team combination that has played at least 5 games together.
+            </p>
+            
+                <li>Hagen/Tommy: 100.0%% (9)</li>
+            
+                <li>Nate/Tyler: 100.0%% (4)</li>
+            
+                <li>Cody/Jason: 100.0%% (2)</li>
+            
+                <li>Brandon/Hagen: 88.9%% (9)</li>
+            
+                <li>Devin/Hagen: 86.7%% (15)</li>
+            
+        </div>
+    </body>

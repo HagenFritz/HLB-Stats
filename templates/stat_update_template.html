@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HLB Stat Report</title>
+		<style type="text/css">
+			h1 {
+                page-break-before: always;
+				color: #4797D2;
+				font-size: 48px;
+                font-family: Helvetica;
+			}
+
+			h2 {
+				color: #F3BB40;
+				font-size: 32px;
+                font-family: Helvetica;
+			}
+
+			h3 {
+				color: #EC5D29;
+				font-size: 24px;
+                font-family: Helvetica;
+			}
+
+			h4 {
+				color: #80AA8B;
+				font-size: 22px;
+                font-family: Helvetica;
+			}
+
+			h5 {
+				color: black;
+				font-size: 20px;
+			}
+
+			p {
+				color: black;
+				font-size: 16px;
+                font-family: Helvetica;
+			}
+			ol {
+				font-family: Helvetica;
+			}
+			ul {
+				color:black;
+				font-size: 16px;
+			}
+            .column {
+                float: left;
+                width: 33.33%;
+                }
+
+                /* Clear floats after the columns */
+                .row:after {
+                content: "";
+                display: table;
+                clear: both;
+                }
+		</style>
+	</head>
+	<body>
+        <h1>High Level Beach: Player Stat Report</h1>
+        <p>Report Date: {{date}}</p>
+        <p>Number of Games: {{n_games}}</p>
+        <h2>About High Level Beach</h2>
+        <p>
+            High Level Beach (HLB) started as a small group of Austin-based players and has since grown into a small syndicate.
+            Players in the group span a range of levels, but typically make appearances at BB leagues and tournaments.
+        </p>
+        <p>
+            The name is inspired by Devin Sears -- one of the original members.
+            Devin insisted on player "High Level" 3s or 4s any time the group decided to play a round outside of the traditional 2s format.
+            The term quickly became a joke amongst the group and rightly became the namesake of the organization. 
+        </p>
+        <p>
+            The organization boasts a <a href="https://www.youtube.com/channel/UCbzTdbIQUKKqTXVV8bfWdJQ">YouTube</a> channel where they post videos from weekly pick-up sessions and the occasional tournament that members participate in.
+            The YouTube channel is managed by Devin Sears and Hagen Fritz. Hagen -- a later addition to the group -- also generates reports (like this) from stats taken on the videos.
+            More about this specific project can be found on <a href="https://github.com/HagenFritz/HLB-Stats">GitHub</a> including past reports and the source code.
+        </p>
+        <h1>Player Leaderboard</h1>
+        <div id="Win Rate">
+            <h2>Win Rate</h2>
+            <p>
+                The percentage of games won, regardless of partner. 
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    {% for player, value in win_rate["top"].items() %}
+                        <li>{{player}}: {{value}}%</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    {% for player, value in win_rate["bottom"].items() %}
+                        <li>{{player}}: {{value}}%</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    {% for player, value in win_rate["mip"].items() %}
+                        <li>{{player}}: {{value}}%</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Point Differential">
+            <h2>Point Differential</h2>
+            <p>
+                The average amount of points a player wins by. 
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    {% for player, value in effectiveness["top"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    {% for player, value in effectiveness["bottom"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    {% for player, value in effectiveness["mip"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Effectiveness">
+            <h2>Effectiveness</h2>
+            <p>
+                The net contribution a player provides to a game. 
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    {% for player, value in effectiveness["top"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    {% for player, value in effectiveness["bottom"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    {% for player, value in effectiveness["mip"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Kills">
+            <h2>Kills</h2>
+            <p>
+                The average number of kills a player gets per game from swings/pokies, blocks, and bumps. 
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    {% for player, value in kills["top"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    {% for player, value in kills["bottom"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    {% for player, value in kills["mip"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Hitting Efficiency">
+            <h2>Hitting Efficiency</h2>
+            <p>
+                The percentage of swings/pokies that are winners.
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    {% for player, value in efficiency["top"].items() %}
+                        <li>{{player}}: {{value}}%</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    {% for player, value in efficiency["bottom"].items() %}
+                        <li>{{player}}: {{value}}%</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    {% for player, value in efficiency["mip"].items() %}
+                        <li>{{player}}: {{value}}%</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Serving Percentage">
+            <h2>Serving Percentage</h2>
+            <p>
+                The percentage of a player's serves that land in or are played.
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    {% for player, value in serving["top"].items() %}
+                        <li>{{player}}: {{value}}%</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    {% for player, value in serving["bottom"].items() %}
+                        <li>{{player}}: {{value}}%</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    {% for player, value in serving["mip"].items() %}
+                        <li>{{player}}: {{value}}%</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Aces">
+            <h2>Aces</h2>
+            <p>
+                Serves that land in untouched or are shanked to the point that the receiver's partner cannot set the ball. 
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    {% for player, value in aces["top"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    {% for player, value in aces["bottom"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    {% for player, value in aces["mip"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Ace2Error">
+            <h2>Ace:Error</h2>
+            <p>
+                Ratio of a player's aces to their missed served. A ratio greater than 1 indicates a player serves more aces than they miss. 
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    {% for player, value in ace2error["top"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    {% for player, value in ace2error["bottom"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    {% for player, value in ace2error["mip"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Pass Rating">
+            <h2>Serve-Receive Rating</h2>
+            <p>
+                How well a player passes a serve on a 0 to 3 scale: 0 - shank, 1 - overpass or setter barely gets ball up, 2 - could be better, 3 - setter can easily get to/set ball
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    {% for player, value in pass_rating["top"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    {% for player, value in pass_rating["bottom"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    {% for player, value in pass_rating["mip"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Blocks">
+            <h2>Blocks</h2>
+            <p>
+                Number of blocks or block touches that result in a kill or are playable after
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    {% for player, value in blocks["top"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    {% for player, value in blocks["bottom"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    {% for player, value in blocks["mip"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Block Efficiency">
+            <h2>Block Efficiency</h2>
+            <p>
+                Percentage of blocks that result in a kill
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h3>Top Players</h3>
+                    <ol>
+                    {% for player, value in pass_rating["top"].items() %}
+                        <li>{{player}}: {{value}}%</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Bottom">
+                    <h3>Needs Improvement</h3>
+                    <ol>
+                    {% for player, value in pass_rating["bottom"].items() %}
+                        <li>{{player}}: {{value}}%</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="column" id="Most Improved">
+                    <h3>Greatest Improvement</h3>
+                    <ol>
+                    {% for player, value in pass_rating["mip"].items() %}
+                        <li>{{player}}: {{value}}%</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="Winningest Team">
+            <h2>Winningest Team</h2>
+            <p>
+                Best team combination that has played at least 5 games together.
+            </p>
+            <ol>
+            {% for team, value in top_teams.items() %}
+                <li>{{team}}: {{value[0]}} ({{value[1]}})</li>
+            {% endfor %}
+            </ol>
+        </div>
+    </body>
