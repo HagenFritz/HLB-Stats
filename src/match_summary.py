@@ -106,7 +106,7 @@ class MatchSummary:
             if len(play_data_match) > 0:
                 print(f'{play_name.replace("_"," ").title()}:')
                 for player, ts in zip(play_data_match["name"],play_data_match["timestamp"]):
-                    print(f"{player.title()} {ts}")
+                    print(f"{player.title()} {ts.hour}:{ts.minute}") # datetime.time thinks format is HH:MM:SS when it is really MM:SS
 
                 print()
         
