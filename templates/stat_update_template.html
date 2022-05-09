@@ -6,56 +6,73 @@
 			h1 {
                 page-break-before: always;
 				color: #4797D2;
-				font-size: 48px;
+				font-size: 70px;
                 font-family: Helvetica;
+                margin-top:15px;
+                margin-bottom:10px;
 			}
 
 			h2 {
 				color: #F3BB40;
-				font-size: 32px;
+				font-size: 55px;
                 font-family: Helvetica;
+                margin-top:10px;
+                margin-bottom:5px;
 			}
 
 			h3 {
 				color: #EC5D29;
-				font-size: 24px;
+				font-size: 50px;
                 font-family: Helvetica;
 			}
 
 			h4 {
 				color: #80AA8B;
-				font-size: 22px;
+				font-size: 40px;
                 font-family: Helvetica;
 			}
 
 			h5 {
-				color: black;
-				font-size: 20px;
+				color: #EC5D29;
+				font-size: 30px;
+                font-family: Helvetica;
+                margin-top:10px;
+                margin-bottom:5px;
 			}
 
 			p {
 				color: black;
-				font-size: 16px;
+				font-size: 20px;
                 font-family: Helvetica;
 			}
 			ol {
 				font-family: Helvetica;
+				font-size: 20px;
 			}
 			ul {
 				color:black;
-				font-size: 16px;
+				font-size: 20px;
 			}
             .column {
                 float: left;
-                width: 33.33%;
+                width: 50%;
+                }
+            .column2 {
+                float: left;
+                width: 30%;
                 }
 
-                /* Clear floats after the columns */
-                .row:after {
+            /* Clear floats after the columns */
+            .row:after {
                 content: "";
                 display: table;
                 clear: both;
                 }
+            
+            .pagebreak {
+                clear: both;
+                page-break-after: always;
+            }
 		</style>
 	</head>
 	<body>
@@ -85,23 +102,25 @@
             </p>
             <div class="row">
                 <div class="column" id="Top">
-                    <h3>Top Players</h3>
+                    <h5>Top Players</h5>
                     <ol>
                     {% for player, value in win_rate["top"].items() %}
                         <li>{{player}}: {{value}}%</li>
                     {% endfor %}
                     </ol>
                 </div>
+                <!--
                 <div class="column" id="Bottom">
-                    <h3>Needs Improvement</h3>
+                    <h5>Needs Improvement</h5>
                     <ol>
                     {% for player, value in win_rate["bottom"].items() %}
                         <li>{{player}}: {{value}}%</li>
                     {% endfor %}
                     </ol>
                 </div>
+            -->
                 <div class="column" id="Most Improved">
-                    <h3>Greatest Improvement</h3>
+                    <h5>Greatest Improvement</h5>
                     <ol>
                     {% for player, value in win_rate["mip"].items() %}
                         <li>{{player}}: {{value}}%</li>
@@ -117,25 +136,27 @@
             </p>
             <div class="row">
                 <div class="column" id="Top">
-                    <h3>Top Players</h3>
+                    <h5>Top Players</h5>
                     <ol>
-                    {% for player, value in effectiveness["top"].items() %}
+                    {% for player, value in point_diff["top"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
                 </div>
+                <!--
                 <div class="column" id="Bottom">
-                    <h3>Needs Improvement</h3>
+                    <h5>Needs Improvement</h5>
                     <ol>
                     {% for player, value in effectiveness["bottom"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
                 </div>
+            -->
                 <div class="column" id="Most Improved">
-                    <h3>Greatest Improvement</h3>
+                    <h5>Greatest Improvement</h5>
                     <ol>
-                    {% for player, value in effectiveness["mip"].items() %}
+                    {% for player, value in point_diff["mip"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
@@ -149,23 +170,25 @@
             </p>
             <div class="row">
                 <div class="column" id="Top">
-                    <h3>Top Players</h3>
+                    <h5>Top Players</h5>
                     <ol>
                     {% for player, value in effectiveness["top"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
                 </div>
+                <!--
                 <div class="column" id="Bottom">
-                    <h3>Needs Improvement</h3>
+                    <h5>Needs Improvement</h5>
                     <ol>
                     {% for player, value in effectiveness["bottom"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
                 </div>
+            -->
                 <div class="column" id="Most Improved">
-                    <h3>Greatest Improvement</h3>
+                    <h5>Greatest Improvement</h5>
                     <ol>
                     {% for player, value in effectiveness["mip"].items() %}
                         <li>{{player}}: {{value}}</li>
@@ -174,6 +197,41 @@
                 </div>
             </div>
         </div>
+        <div id="Errors">
+            <h2>Errors</h2>
+            <p>
+                Unforced errors made during game
+            </p>
+            <div class="row">
+                <div class="column" id="Top">
+                    <h5>Top Players</h5>
+                    <ol>
+                    {% for player, value in errors["top"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <!--
+                <div class="column" id="Bottom">
+                    <h5>Needs Improvement</h5>
+                    <ol>
+                    {% for player, value in errors["bottom"].items() %}
+                        <li>{{player}}: {{value}}%</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                -->
+                <div class="column" id="Most Improved">
+                    <h5>Greatest Improvement</h5>
+                    <ol>
+                    {% for player, value in errors["mip"].items() %}
+                        <li>{{player}}: {{value}}</li>
+                    {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="pagebreak"></div>
         <div id="Kills">
             <h2>Kills</h2>
             <p>
@@ -181,23 +239,25 @@
             </p>
             <div class="row">
                 <div class="column" id="Top">
-                    <h3>Top Players</h3>
+                    <h5>Top Players</h5>
                     <ol>
                     {% for player, value in kills["top"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
                 </div>
+                <!--
                 <div class="column" id="Bottom">
-                    <h3>Needs Improvement</h3>
+                    <h5>Needs Improvement</h5>
                     <ol>
                     {% for player, value in kills["bottom"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
                 </div>
+            -->
                 <div class="column" id="Most Improved">
-                    <h3>Greatest Improvement</h3>
+                    <h5>Greatest Improvement</h5>
                     <ol>
                     {% for player, value in kills["mip"].items() %}
                         <li>{{player}}: {{value}}</li>
@@ -213,23 +273,25 @@
             </p>
             <div class="row">
                 <div class="column" id="Top">
-                    <h3>Top Players</h3>
+                    <h5>Top Players</h5>
                     <ol>
                     {% for player, value in efficiency["top"].items() %}
                         <li>{{player}}: {{value}}%</li>
                     {% endfor %}
                     </ol>
                 </div>
+                <!--
                 <div class="column" id="Bottom">
-                    <h3>Needs Improvement</h3>
+                    <h5>Needs Improvement</h5>
                     <ol>
                     {% for player, value in efficiency["bottom"].items() %}
                         <li>{{player}}: {{value}}%</li>
                     {% endfor %}
                     </ol>
                 </div>
+            -->
                 <div class="column" id="Most Improved">
-                    <h3>Greatest Improvement</h3>
+                    <h5>Greatest Improvement</h5>
                     <ol>
                     {% for player, value in efficiency["mip"].items() %}
                         <li>{{player}}: {{value}}%</li>
@@ -238,6 +300,7 @@
                 </div>
             </div>
         </div>
+        <div class="pagebreak"></div>
         <div id="Serving Percentage">
             <h2>Serving Percentage</h2>
             <p>
@@ -245,23 +308,25 @@
             </p>
             <div class="row">
                 <div class="column" id="Top">
-                    <h3>Top Players</h3>
+                    <h5>Top Players</h5>
                     <ol>
                     {% for player, value in serving["top"].items() %}
                         <li>{{player}}: {{value}}%</li>
                     {% endfor %}
                     </ol>
                 </div>
+                <!--
                 <div class="column" id="Bottom">
-                    <h3>Needs Improvement</h3>
+                    <h5>Needs Improvement</h5>
                     <ol>
                     {% for player, value in serving["bottom"].items() %}
                         <li>{{player}}: {{value}}%</li>
                     {% endfor %}
                     </ol>
                 </div>
+            -->
                 <div class="column" id="Most Improved">
-                    <h3>Greatest Improvement</h3>
+                    <h5>Greatest Improvement</h5>
                     <ol>
                     {% for player, value in serving["mip"].items() %}
                         <li>{{player}}: {{value}}%</li>
@@ -277,23 +342,25 @@
             </p>
             <div class="row">
                 <div class="column" id="Top">
-                    <h3>Top Players</h3>
+                    <h5>Top Players</h5>
                     <ol>
                     {% for player, value in aces["top"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
                 </div>
+                <!--
                 <div class="column" id="Bottom">
-                    <h3>Needs Improvement</h3>
+                    <h5>Needs Improvement</h5>
                     <ol>
                     {% for player, value in aces["bottom"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
                 </div>
+            -->
                 <div class="column" id="Most Improved">
-                    <h3>Greatest Improvement</h3>
+                    <h5>Greatest Improvement</h5>
                     <ol>
                     {% for player, value in aces["mip"].items() %}
                         <li>{{player}}: {{value}}</li>
@@ -309,23 +376,25 @@
             </p>
             <div class="row">
                 <div class="column" id="Top">
-                    <h3>Top Players</h3>
+                    <h5>Top Players</h5>
                     <ol>
                     {% for player, value in ace2error["top"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
                 </div>
+                <!--
                 <div class="column" id="Bottom">
-                    <h3>Needs Improvement</h3>
+                    <h5>Needs Improvement</h5>
                     <ol>
                     {% for player, value in ace2error["bottom"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
                 </div>
+            -->
                 <div class="column" id="Most Improved">
-                    <h3>Greatest Improvement</h3>
+                    <h5>Greatest Improvement</h5>
                     <ol>
                     {% for player, value in ace2error["mip"].items() %}
                         <li>{{player}}: {{value}}</li>
@@ -341,23 +410,25 @@
             </p>
             <div class="row">
                 <div class="column" id="Top">
-                    <h3>Top Players</h3>
+                    <h5>Top Players</h5>
                     <ol>
                     {% for player, value in pass_rating["top"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
                 </div>
+                <!--
                 <div class="column" id="Bottom">
-                    <h3>Needs Improvement</h3>
+                    <h5>Needs Improvement</h5>
                     <ol>
                     {% for player, value in pass_rating["bottom"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
                 </div>
+            -->
                 <div class="column" id="Most Improved">
-                    <h3>Greatest Improvement</h3>
+                    <h5>Greatest Improvement</h5>
                     <ol>
                     {% for player, value in pass_rating["mip"].items() %}
                         <li>{{player}}: {{value}}</li>
@@ -366,6 +437,7 @@
                 </div>
             </div>
         </div>
+        <div class="pagebreak"></div>
         <div id="Blocks">
             <h2>Blocks</h2>
             <p>
@@ -373,23 +445,25 @@
             </p>
             <div class="row">
                 <div class="column" id="Top">
-                    <h3>Top Players</h3>
+                    <h5>Top Players</h5>
                     <ol>
                     {% for player, value in blocks["top"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
                 </div>
+                <!--
                 <div class="column" id="Bottom">
-                    <h3>Needs Improvement</h3>
+                    <h5>Needs Improvement</h5>
                     <ol>
                     {% for player, value in blocks["bottom"].items() %}
                         <li>{{player}}: {{value}}</li>
                     {% endfor %}
                     </ol>
                 </div>
+            -->
                 <div class="column" id="Most Improved">
-                    <h3>Greatest Improvement</h3>
+                    <h5>Greatest Improvement</h5>
                     <ol>
                     {% for player, value in blocks["mip"].items() %}
                         <li>{{player}}: {{value}}</li>
@@ -405,23 +479,25 @@
             </p>
             <div class="row">
                 <div class="column" id="Top">
-                    <h3>Top Players</h3>
+                    <h5>Top Players</h5>
                     <ol>
                     {% for player, value in pass_rating["top"].items() %}
                         <li>{{player}}: {{value}}%</li>
                     {% endfor %}
                     </ol>
                 </div>
+                <!--
                 <div class="column" id="Bottom">
-                    <h3>Needs Improvement</h3>
+                    <h5>Needs Improvement</h5>
                     <ol>
                     {% for player, value in pass_rating["bottom"].items() %}
                         <li>{{player}}: {{value}}%</li>
                     {% endfor %}
                     </ol>
                 </div>
+            -->
                 <div class="column" id="Most Improved">
-                    <h3>Greatest Improvement</h3>
+                    <h5>Greatest Improvement</h5>
                     <ol>
                     {% for player, value in pass_rating["mip"].items() %}
                         <li>{{player}}: {{value}}%</li>
@@ -430,15 +506,34 @@
                 </div>
             </div>
         </div>
+        <div class="pagebreak"></div>
         <div id="Winningest Team">
-            <h2>Winningest Team</h2>
+            <h2>Winningest Teams</h2>
             <p>
                 Best team combination that has played at least 5 games together.
             </p>
-            <ol>
+            <ol>y
             {% for team, value in top_teams.items() %}
                 <li>{{team}}: {{value[0]}} ({{value[1]}})</li>
             {% endfor %}
             </ol>
         </div>
+        <h1>Individualized Reports</h1>
+        <p>The following pages highlight the individual statistics for each of the core HLB players.</p>
+        {% for player, individual_stats in per_player.items() %}
+            <h1>{{player.title()}}</h1>
+            <p>Number of Games: {{individual_stats["N"]}}</p>
+            <div class="row">
+                <div class="column2">
+                    {% for label, value in individual_stats.items() %}
+                        {% if label != "N" %}
+                            <p>{{label.replace("_"," ").title()}}: {{value}}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="column">
+                    <p><img src="{{get_player_figure(player)}}" width="700"></p>
+                </div>
+            </div>
+        {% endfor %}
     </body>
