@@ -111,7 +111,7 @@ class Report:
         player_data = data[(data['name'] == player)]
         n_games = len(player_data)
         if n_games > 0:
-            win_rate = round(len(player_data[(player_data['win_loss'] == 'win')]) / n_games * 100, 1)
+            win_rate = len(player_data[(player_data['win_loss'] == 'win')]) / n_games * 100
         else:
             win_rate = 0
 
@@ -142,12 +142,37 @@ class Report:
         games_with_aces = player_data[(player_data['aces'] > 0)]
         games_with_aces_and_errors = games_with_aces[(games_with_aces['missed_serves'] > 0)]
         if len(games_with_aces) > 0:
-            ace2error = round(np.nanmean(games_with_aces_and_errors['aces'] / games_with_aces_and_errors['missed_serves']), 1)
+            ace2error = np.nanmean(games_with_aces_and_errors['aces'] / games_with_aces_and_errors['missed_serves'])
         else:
             ace2error = 0
         return ace2error
 
-    def calculate_per_game_stats(self, latest=True):
+    def calculate_point_differential(self, player, latest=True):
+        """
+        Calculates the ace:error ratio for the given player
+
+        Parameters
+        ----------
+        player : str
+            name of the player
+        latest : boolean, default True
+            whether to use the latest data or the previous data
+
+        Returns
+        -------
+        point_diff : float
+            player's average point differential
+        """
+        if latest:
+            data = self.data.copy()
+        else:
+            data = self.previous_data.copy()
+
+        player = player.title()
+        player_data = data[(data['name'] == player)]
+        return np.nanmean(player_data['points_for'] / player_data['points_against'])
+
+    def calculate_per_game_stats(self, latest=True, decimals=1):
         """
         Calculates stats per game
 
@@ -162,7 +187,7 @@ class Report:
             data = self.previous_data.copy()
 
         per_game = {col: [] for col in data.columns if col not in ['date', 'partner','win_loss', 'match_id','tournament',"switch1","switch2","switch3","switch4","switch5","switch6","switch7","switch8"]}
-        for calculated_stat in ('n','win_rate', 'ace2error'):
+        for calculated_stat in ('n','win_rate', 'ace2error',"point_differential"):
             per_game[calculated_stat] = []
 
         for player in data['name'].unique():
@@ -172,16 +197,19 @@ class Report:
                     per_game[key].append(player)
                 elif key == 'win_rate':
                     win_rate, _ = self.calculate_win_rate(player, latest=latest)
-                    per_game['win_rate'].append(win_rate)
+                    per_game['win_rate'].append(round(win_rate, decimals))
                 elif key == 'ace2error':
                     ace2error = self.calculate_ace_error_ratio(player, latest=latest)
-                    per_game['ace2error'].append(ace2error)
+                    per_game['ace2error'].append(round(ace2error, decimals))
+                elif key == "point_differential":
+                    point_diff = self.calculate_point_differential(player, latest=latest)
+                    per_game["point_differential"].append(round(point_diff, decimals))
                 elif key == 'n':
                     per_game['n'].append(len(player_data))
                 elif key in ('hitting_efficiency', 'serving_percentage'):
-                    per_game[key].append(round(np.nanmean(player_data[key]) * 100, 1))
+                    per_game[key].append(round(np.nanmean(player_data[key]) * 100, decimals))
                 else:
-                    per_game[key].append(round(np.nanmean(player_data[key]), 1))
+                    per_game[key].append(round(np.nanmean(player_data[key]), decimals))
                     
         return pd.DataFrame(per_game)
 
@@ -262,13 +290,13 @@ class Report:
         """
         
         """
-        latest_stats = self.calculate_per_game_stats(latest=True)
-        previous_stats = self.calculate_per_game_stats(latest=False)
+        latest_stats = self.calculate_per_game_stats(latest=True,decimals=2)
+        previous_stats = self.calculate_per_game_stats(latest=False,decimals=2)
         latest_stats.set_index("name",inplace=True)
         previous_stats.set_index("name",inplace=True)
 
         changes = latest_stats - previous_stats
-        return changes.round(decimals=1)
+        return changes.round(decimals=2)
 
     def plot_stats_over_time(self, player):
         """
@@ -279,19 +307,19 @@ class Report:
         data_player.sort_values(['date'], inplace=True)
         _, axes = plt.subplots(3, 2, figsize=(10, 12), sharex=True)
         variables = ['win_rate', 'hitting_efficiency', 'effectiveness', 'serving_percentage', 'serve_receive_rating', 'errors']
-        limits = [[0, 100], [0, 1], [0, 20], [0, 1], [0, 3], [0, 10]]
+        limits = [[0, 100], [0, 1], [0, 10], [0.5, 1], [0, 3], [0, 7]]
         for variable, limit, ax in zip(variables, limits, axes.flat):
             variable_points = []
 
-        for d in data_player['date'].unique():
-            data_player_to_date = data_player[(data_player['date'] <= d)]
-            if variable == 'win_rate':
-                n_games = len(data_player_to_date)
-                win_rate = round(len(data_player_to_date[(data_player_to_date['win_loss'] == 'win')]) / n_games * 100, 1)
-                variable_points.append(win_rate)
-            else:
-                variable_points.append(np.mean(data_player_to_date[variable]))
-        else:
+            for d in data_player['date'].unique():
+                data_player_to_date = data_player[(data_player['date'] <= d)]
+                if variable == 'win_rate':
+                    n_games = len(data_player_to_date)
+                    win_rate = round(len(data_player_to_date[(data_player_to_date['win_loss'] == 'win')]) / n_games * 100, 1)
+                    variable_points.append(win_rate)
+                else:
+                    variable_points.append(np.mean(data_player_to_date[variable]))
+
             ax.plot((data_player['date'].unique()), variable_points, lw=3, color='black')
             ax.xaxis.set_major_locator(mdates.MonthLocator())
             ax.xaxis.set_major_formatter(mdates.DateFormatter('%b'))
@@ -299,17 +327,19 @@ class Report:
             ax.xaxis.set_minor_formatter(mdates.DateFormatter('%d'))
             ax.set_ylim(limit)
             ax.tick_params(axis='x', labelsize=12)
+            ax.tick_params(axis='x', which="major",labelsize=14,pad=10)
             ax.tick_params(axis='y', labelsize=14)
             ax.set_title((variable.replace('_', ' ').title()), fontsize=18)
+            
             for loc in ('top', 'right'):
                 ax.spines[loc].set_visible(False)
-            else:
-                plt.savefig(f"{self.project_dir}/figures/{player}-stats_over_time.png")
-                plt.close()
+
+        plt.savefig(f"{self.project_dir}/figures/{player}-stats_over_time.png")
+        plt.close()
 
     def get_player_figure(self, player):
         """
-        
+        Gets the string corresponding to the player's statistics
         """
         return f"{self.project_dir}/figures/{player}-stats_over_time.png"
 
@@ -379,6 +409,7 @@ class Report:
         outputText = template.render(date=self.date, previous_date=self.previous_date, n_games=self.total_games,
             win_rate=results['win_rate'],
             effectiveness=results['effectiveness'],
+            point_diff=results["point_differential"],
             kills=results['kills'],
             efficiency=results['hitting_efficiency'],
             aces=results['aces'],
