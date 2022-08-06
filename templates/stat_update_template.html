@@ -87,7 +87,7 @@
         <p>
             The name is inspired by Devin Sears -- one of the original members.
             Devin insisted on player "High Level" 3s or 4s any time the group decided to play a round outside of the traditional 2s format.
-            The term quickly became a joke amongst the group and rightly became the namesake of the organization. 
+            The term quickly became a joke amongst the group and Hagen Fritz and Bruno Chiquini came up with the idea to incorporate the term when building out the group's brand.
         </p>
         <p>
             The organization boasts a <a href="https://www.youtube.com/channel/UCbzTdbIQUKKqTXVV8bfWdJQ">YouTube</a> channel where they post videos from weekly pick-up sessions and the occasional tournament that members participate in.
@@ -481,7 +481,7 @@
                 <div class="column" id="Top">
                     <h5>Top Players</h5>
                     <ol>
-                    {% for player, value in pass_rating["top"].items() %}
+                    {% for player, value in block_eff["top"].items() %}
                         <li>{{player}}: {{value}}%</li>
                     {% endfor %}
                     </ol>
@@ -490,7 +490,7 @@
                 <div class="column" id="Bottom">
                     <h5>Needs Improvement</h5>
                     <ol>
-                    {% for player, value in pass_rating["bottom"].items() %}
+                    {% for player, value in block_eff["bottom"].items() %}
                         <li>{{player}}: {{value}}%</li>
                     {% endfor %}
                     </ol>
@@ -499,7 +499,7 @@
                 <div class="column" id="Most Improved">
                     <h5>Greatest Improvement</h5>
                     <ol>
-                    {% for player, value in pass_rating["mip"].items() %}
+                    {% for player, value in block_eff["mip"].items() %}
                         <li>{{player}}: {{value}}%</li>
                     {% endfor %}
                     </ol>
@@ -512,7 +512,7 @@
             <p>
                 Best team combination that has played at least 5 games together.
             </p>
-            <ol>y
+            <ol>
             {% for team, value in top_teams.items() %}
                 <li>{{team}}: {{value[0]}} ({{value[1]}})</li>
             {% endfor %}
