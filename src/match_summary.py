@@ -113,31 +113,34 @@ class MatchSummary:
         # player-specific stats summary
         for player in match_data['name']:
             player_data = match_data[(match_data['name'] == player)]
-            effectiveness = int(player_data['effectiveness'].values[0])
-            if effectiveness > 0:
-                sign_annot = '+'
-            else:
-                sign_annot = ''
-            print(f"{player.title()} ({sign_annot}{effectiveness})")
-            # looping through remaining variables
-            for variable in variables:
-                value = player_data[variable].values[0]
-                if variable == "hitting_efficiency":
-                    swings = int(player_data["swings"].values[0])
-                    print(f"\tSwings: {swings} ({round(value * 100, 1)}%)")
-                elif variable == "serving_percentage":
-                    serves = int(player_data["serves"].values[0])
-                    print(f"\tServes: {serves} ({round(value * 100, 1)}%)")
-                elif variable == "blocking_efficiency":
-                    blocks = int(player_data["blocks"].values[0])
-                    print(f"\tBlocks: {blocks} ({round(value * 100, 1)}%)") 
+            try:
+                effectiveness = int(player_data['effectiveness'].values[0])
+                if effectiveness > 0:
+                    sign_annot = '+'
                 else:
-                    try:
-                        value = int(value)
-                    except ValueError:
-                        value = 0
-                
-                    print(f"\t{variable.replace('_', ' ').title()}: {value}")
+                    sign_annot = ''
+                print(f"{player.title()} ({sign_annot}{effectiveness})")
+                # looping through remaining variables
+                for variable in variables:
+                    value = player_data[variable].values[0]
+                    if variable == "hitting_efficiency":
+                        swings = int(player_data["swings"].values[0])
+                        print(f"\tSwings: {swings} ({round(value * 100, 1)}%)")
+                    elif variable == "serving_percentage":
+                        serves = int(player_data["serves"].values[0])
+                        print(f"\tServes: {serves} ({round(value * 100, 1)}%)")
+                    elif variable == "blocking_efficiency":
+                        blocks = int(player_data["blocks"].values[0])
+                        print(f"\tBlocks: {blocks} ({round(value * 100, 1)}%)") 
+                    else:
+                        try:
+                            value = int(value)
+                        except ValueError:
+                            value = 0
+                    
+                        print(f"\t{variable.replace('_', ' ').title()}: {value}")
+            except ValueError:
+                pass
                     
             print()
             

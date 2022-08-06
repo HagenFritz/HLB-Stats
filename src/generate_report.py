@@ -206,7 +206,7 @@ class Report:
                     per_game["point_differential"].append(round(point_diff, decimals))
                 elif key == 'n':
                     per_game['n'].append(len(player_data))
-                elif key in ('hitting_efficiency', 'serving_percentage'):
+                elif key in ("hitting_efficiency", "serving_percentage", "blocking_efficiency"):
                     per_game[key].append(round(np.nanmean(player_data[key]) * 100, decimals))
                 else:
                     per_game[key].append(round(np.nanmean(player_data[key]), decimals))
@@ -415,6 +415,7 @@ class Report:
             aces=results['aces'],
             serving=results['serving_percentage'],
             blocks=results['blocks'],
+            block_eff=results["blocking_efficiency"],
             errors=results['errors'],
             pass_rating=results['serve_receive_rating'],
             ace2error=results['ace2error'],
