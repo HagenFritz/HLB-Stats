@@ -116,3 +116,5 @@ target/
 *.mp4a
 *.m4a
 
+# Credentials
+settings.py
